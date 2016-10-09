@@ -1,16 +1,18 @@
 `NODEJS`
 
-codes = {}
+var codes = {}
 function frequency(str) {
 
-  var freqs = {}
+  freqs = {}
   console.log('Running...Frequency')
   console.log('Frequency')
-  for(var i=0; i < str.length; i++) {
-    if (freqs[str[i]]) 
-      freqs[str[i]] = freqs[str[i]] + 1
-    else
-      freqs[str[i]] = 1
+  for( ch in str) {
+    if(freqs[str[ch]] == undefined) {
+      freqs[str[ch]] = 1
+    }
+    else {
+      freqs[str[ch]]++
+    }
   }
   console.log(freqs)
   return(freqs)
@@ -18,22 +20,22 @@ function frequency(str) {
 
 
 function sortFreq(freqs) {
-  
-  var tuples = []
-  for(key in freqs) { 
-    tuples.push(Array(freqs[key], key))
+  tuples = []
+  for( key in freqs) { 
+    tuples.push([freqs[key], key])
   }
-  console.log(tuples) 
-  return(tuples.sort)
+  console.log(tuples.sort()) 
+  t = tuples.sort()
+  return(t)
 }
 
 
 function buildTree(tuples) {
 
   while(tuples.length > 1) {
-    var leastTwo  = tuples.slice(0,2)             
-    var theRest = tuples.slice(2,tuples.length)
-    var combFreq = leastTwo[0][0] + leastTwo[1][0]
+    leastTwo  = tuples.slice(0,2)             
+    theRest = tuples.slice(2,tuples.length)
+    combFreq = leastTwo[0][0] + leastTwo[1][0]
     tuples = theRest + [(combFreq, leastTwo)]
     tuples.sort()
   }
@@ -98,4 +100,4 @@ var tuples = sortFreq(freqs)
 console.log('After sorting Frequency : ' + tuples)
 var tree = buildTree(tuples)
 console.log('After Building Tree : ' + tree)
-
+var ttree = trimTree(tree)
