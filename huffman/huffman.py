@@ -66,3 +66,9 @@ def decode (tree, str) :
             p = tree                 # and restart for next character
     return output
 
+
+print('String is -> \'aahavhvaa\'')
+tree = trimTree(buildTree(sort(frequency('aahavhvaa'))))
+assignCodes(tree)
+print(codes)
+print(decode(tree, encode('aahavhvaa')))
